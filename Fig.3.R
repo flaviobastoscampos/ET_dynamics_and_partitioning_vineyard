@@ -10,6 +10,7 @@
 
 library(tidyverse)
 library(egg)          # to use ggarrange function
+library(scales)       # to use the function date_format() in ggplot
 
 
 # Fig. 3 -------------------------------
@@ -17,7 +18,6 @@ library(egg)          # to use ggarrange function
 
 # 2021 -----------------------------
 
-setwd("C:/Users/path/to/datafile")
 setwd("C:/Users/bastosca/Desktop/Scripts_for_Figures/only_RDS_Data_ETpaper_review_2014_02_10")
 
 data_d <- readRDS("Vineyard_data_Figs_3_4_8.rds") %>% as_tibble(.)
@@ -129,7 +129,6 @@ plot_Fig_3A_2021 <- ggplot(data_d, aes(x=date))+
 
 # 2022 -----------------------------
 
-setwd("C:/Users/path/to/datafile")
 setwd("C:/Users/bastosca/Desktop/Scripts_for_Figures/only_RDS_Data_ETpaper_review_2014_02_10")
 
 data_d <- readRDS("Vineyard_data_Figs_3_4_8.rds") %>% as_tibble(.)
@@ -220,7 +219,6 @@ plot_Fig_3A_2022 <- ggplot(data_d, aes(x=date))+
 # boxplot -----------------------------
 
 # load
-setwd("C:/Users/path/to/datafile")
 setwd("C:/Users/bastosca/Desktop/Scripts_for_Figures/only_RDS_Data_ETpaper_review_2014_02_10")
 
 data_d <- readRDS("Vineyard_data_Figs_3_4_8.rds") %>% as_tibble(.)
@@ -289,14 +287,9 @@ Fig_3_panel <- ggarrange(plot_Fig_3A_2021, plot_Fig_3A_2022, Fig_3_box,
                          heights= c(1.0), widths= c(1.0, 1.0, 0.30),
                          nrow=1, ncol=3)
 
-setwd("C:/Users/path/to/output")
 setwd("C:/Users/bastosca/Desktop/Scripts_for_Figures/out")
 ggsave("Fig_3.png", plot= Fig_3_panel, width= 26.0, height= 9.0, units= "cm")
 
 
 # done.
-
-
-
-
 

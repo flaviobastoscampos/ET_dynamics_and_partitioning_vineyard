@@ -10,11 +10,11 @@
 
 library(tidyverse)
 library(egg)          # to use ggarrange function
+library(scales)       # to use the function date_format() in ggplot
 
 
 # Fig. 2 -------------------------------
 
-setwd("C:/Users/path/to/datafile")
 setwd("C:/Users/bastosca/Desktop/Scripts_for_Figures/only_RDS_Data_ETpaper_review_2014_02_10")
 
 data_d <- readRDS("Vineyard_data_Fig_2.rds") %>% as_tibble(.)
@@ -59,13 +59,13 @@ plot_Plt_Tair_VPD <- ggplot(Plt_Tair_VPD_d, aes(date, Value))+
   scale_y_continuous(expand = c(0, 0),
                      expression(Precip~(mm~d^-~1)~Irrig~(mm~d^-~1)~"; "~"T"[air]~("°C")),
                      breaks=seq(0.0, 50.0, 10.0),
-                     sec.axis= sec_axis(~./10.0, name= expression(VPD~(KPa)),  # careful
+                     sec.axis= sec_axis(~./10.0, name= expression(VPD~(KPa)),
                                         breaks= seq(0.0, 4.0, 1.0)))+
   
   scale_x_datetime(expand= c(0, 0),
                    expression(),
                    date_breaks= ("month"),
-                   labels= date_format("%b", tz="GMT"),     # labels= date_format("%Y/%m/%d"), # labels= date_format("%b"),
+                   labels= date_format("%b", tz="GMT"),
                    limits= as.POSIXct(c(
                      as.POSIXct("2021-05-01 00:00:00", format="%Y-%m-%d %H:%M:%S", tz="GMT"), 
                      as.POSIXct("2022-08-31 23:59:00", format="%Y-%m-%d %H:%M:%S", tz="GMT"))))+
@@ -179,7 +179,6 @@ plot_Plt_ET_GPP_Rn <- ggplot(data_d)+
 plot_meteo_season_2021_2022 <- ggarrange(plot_Plt_Tair_VPD, 
                                          plot_Plt_ET_GPP_Rn, nrow=2, ncol=1)
 
-setwd("C:/Users/path/to/output")
 setwd("C:/Users/bastosca/Desktop/Scripts_for_Figures/out")
 ggsave("Fig_2.png", plot= plot_meteo_season_2021_2022, width= 25.0, height= 18.0, units= "cm")
 
